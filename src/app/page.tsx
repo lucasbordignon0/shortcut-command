@@ -38,17 +38,16 @@ export default function Home() {
       <AnimatePresence>
         {isCmdPaneVisible && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9, height: 0 }}
+            animate={{ opacity: 1, scale: 1, height: "auto" }}
+            exit={{ opacity: 0, scale: 0.9, height: 0 }}
             transition={{
               type: "spring",
-              stiffness: 1200,
-              damping: 40,
+              stiffness: 500,
+              damping: 30,
               mass: 1,
-              duration: 0.5,
             }}
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 z-50"
+            className="absolute transform -translate-x-1/2 -translate-y-1/2 z-50 overflow-hidden"
           >
             <CmdPane isVisible={isCmdPaneVisible} />
           </motion.div>

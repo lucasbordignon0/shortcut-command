@@ -14,12 +14,11 @@ import {
 import { Input } from "../ui/input";
 import { LineItem } from "./LineItem";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
+import { motion } from "framer-motion";
 
-export function CmdPane() {
-  const [isVisible, setIsVisible] = useState(false);
+export function CmdPane({ isVisible }: { isVisible: boolean }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Focus the input when the CmdPane is visible
   useEffect(() => {
     if (isVisible && inputRef.current) {
       inputRef.current.focus();
@@ -52,94 +51,100 @@ export function CmdPane() {
     </svg>
   );
   return (
-    <div className="flex flex-col w-[456px] gap-3 p-3 rounded-3xl bg-neutral-100">
-      <Input ref={inputRef} type="text" placeholder="Search" />
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList>
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="task">Task</TabsTrigger>
-          <TabsTrigger value="document">Document</TabsTrigger>
-          <TabsTrigger value="media">Media</TabsTrigger>
-          <TabsTrigger value="people">People</TabsTrigger>
-        </TabsList>
-      </Tabs>
-      <div className="flex flex-col gap-2">
-        <h6 className="text-xs font-semibold text-neutral-400/50 px-3">
-          Favorites
-        </h6>
-        <div className="flex flex-col rounded-xl w-full gap-2 p-1 bg-white">
-          <LineItem
-            icon={<DocumentIcon className="w-4 h-4" />}
-            iconColor="#007AED"
-            iconBgColor="#D5F0FF"
-            text="Take note"
-            shortcuts={["⌘", "T"]}
-          />
-          <LineItem
-            icon={<DocumentPlusIcon className="w-4 h-4" />}
-            iconColor="#FFC736"
-            iconBgColor="#FFEEBA"
-            text="Create document"
-            shortcuts={["⌘", "N"]}
-          />
-          <LineItem
-            icon={<UserPlusIcon className="w-4 h-4" />}
-            iconColor="#FC5753"
-            iconBgColor="#FDD6DB"
-            text="Add contact"
-            shortcuts={["⇧", "⌘", "A"]}
-          />
-          <LineItem
-            icon={<EnvelopeIcon className="w-4 h-4" />}
-            iconColor="#30D8FF"
-            iconBgColor="#DBF8FD"
-            text="Compose mail"
-            shortcuts={["⌘", "A"]}
-          />
-          <LineItem
-            icon={<CustomSpotifyIcon />}
-            iconColor="#1ED760"
-            iconBgColor="#CCFEE0"
-            text="Play Spotify"
-            shortcuts={["⌘", "S"]}
-          />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1, duration: 0.3 }}
+    >
+      <div className="flex flex-col w-[456px] gap-3 p-3 rounded-3xl bg-neutral-100">
+        <Input ref={inputRef} type="text" placeholder="Search" />
+        <Tabs defaultValue="all" className="w-full">
+          <TabsList>
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="task">Task</TabsTrigger>
+            <TabsTrigger value="document">Document</TabsTrigger>
+            <TabsTrigger value="media">Media</TabsTrigger>
+            <TabsTrigger value="people">People</TabsTrigger>
+          </TabsList>
+        </Tabs>
+        <div className="flex flex-col gap-2">
+          <h6 className="text-xs font-semibold text-neutral-400/50 px-3">
+            Favorites
+          </h6>
+          <div className="flex flex-col rounded-xl w-full gap-2 p-1 bg-white">
+            <LineItem
+              icon={<DocumentIcon className="w-4 h-4" />}
+              iconColor="#007AED"
+              iconBgColor="#D5F0FF"
+              text="Take note"
+              shortcuts={["⌘", "T"]}
+            />
+            <LineItem
+              icon={<DocumentPlusIcon className="w-4 h-4" />}
+              iconColor="#FFC736"
+              iconBgColor="#FFEEBA"
+              text="Create document"
+              shortcuts={["⌘", "N"]}
+            />
+            <LineItem
+              icon={<UserPlusIcon className="w-4 h-4" />}
+              iconColor="#FC5753"
+              iconBgColor="#FDD6DB"
+              text="Add contact"
+              shortcuts={["⇧", "⌘", "A"]}
+            />
+            <LineItem
+              icon={<EnvelopeIcon className="w-4 h-4" />}
+              iconColor="#30D8FF"
+              iconBgColor="#DBF8FD"
+              text="Compose mail"
+              shortcuts={["⌘", "A"]}
+            />
+            <LineItem
+              icon={<CustomSpotifyIcon />}
+              iconColor="#1ED760"
+              iconBgColor="#CCFEE0"
+              text="Play Spotify"
+              shortcuts={["⌘", "S"]}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <h6 className="text-xs font-semibold text-neutral-400/50 px-3">
+            Favorites
+          </h6>
+          <div className="flex flex-col rounded-xl w-full gap-2 p-1 bg-white">
+            <LineItem
+              icon={<Squares2X2Icon className="w-4 h-4" />}
+              iconColor="#8B8B8B"
+              iconBgColor="#E1E1E1"
+              text="Dashboard"
+              shortcuts={["D"]}
+            />
+            <LineItem
+              icon={<Cog8ToothIcon className="w-4 h-4" />}
+              iconColor="#8B8B8B"
+              iconBgColor="#E1E1E1"
+              text="Settings"
+              shortcuts={["⇧", "⌘", "S"]}
+            />
+            <LineItem
+              icon={<BellIcon className="w-4 h-4" />}
+              iconColor="#8B8B8B"
+              iconBgColor="#E1E1E1"
+              text="Notifications"
+              shortcuts={["⇧", "N"]}
+            />
+            <LineItem
+              icon={<GlobeEuropeAfricaIcon className="w-4 h-4" />}
+              iconColor="#8B8B8B"
+              iconBgColor="#E1E1E1"
+              text="Language & Region"
+              shortcuts={["⌘", "L"]}
+            />
+          </div>
         </div>
       </div>
-      <div className="flex flex-col gap-2">
-        <h6 className="text-xs font-semibold text-neutral-400/50 px-3">
-          Favorites
-        </h6>
-        <div className="flex flex-col rounded-xl w-full gap-2 p-1 bg-white">
-          <LineItem
-            icon={<Squares2X2Icon className="w-4 h-4" />}
-            iconColor="#8B8B8B"
-            iconBgColor="#E1E1E1"
-            text="Dashboard"
-            shortcuts={["D"]}
-          />
-          <LineItem
-            icon={<Cog8ToothIcon className="w-4 h-4" />}
-            iconColor="#8B8B8B"
-            iconBgColor="#E1E1E1"
-            text="Settings"
-            shortcuts={["⇧", "⌘", "S"]}
-          />
-          <LineItem
-            icon={<BellIcon className="w-4 h-4" />}
-            iconColor="#8B8B8B"
-            iconBgColor="#E1E1E1"
-            text="Notifications"
-            shortcuts={["⇧", "N"]}
-          />
-          <LineItem
-            icon={<GlobeEuropeAfricaIcon className="w-4 h-4" />}
-            iconColor="#8B8B8B"
-            iconBgColor="#E1E1E1"
-            text="Language & Region"
-            shortcuts={["⌘", "L"]}
-          />
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 }
